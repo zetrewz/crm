@@ -63,8 +63,12 @@ class Task(models.Model):
         related_name='tasks'
     )
     created = models.DateTimeField(auto_now_add=True)
-    deadline = models.DateTimeField(null=True, blank=True)
-    overdue = models.BooleanField(default=False)
+    finished = models.BooleanField(default=False)
 
     # def __str__(self):
     #     return self.name
+
+
+class Invitation(models.Model):
+    user = models.ForeignKey(User, on_delete=CASCADE, related_name='invitations')
+    team = models.ForeignKey(Team, on_delete=CASCADE, related_name='invitations')

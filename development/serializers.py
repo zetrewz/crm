@@ -1,7 +1,8 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from development.models import Project, Team, Sprint, Task
-from users.serializers import UserSS
+from development.models import Project, Team, Sprint, Task, Invitation
+from users.serializers import UserSerializer
 
 
 class ProjectListSerializer(serializers.ModelSerializer):
@@ -13,7 +14,7 @@ class ProjectListSerializer(serializers.ModelSerializer):
 class ProjectCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['name']
+        fields = ['head', 'name']
 
 
 class TeamListSerializer(serializers.ModelSerializer):
@@ -23,7 +24,7 @@ class TeamListSerializer(serializers.ModelSerializer):
 
 
 class TeamDetailSerializer(serializers.ModelSerializer):
-    members = UserSS(many=True)
+    members = UserSerializer(many=True)
 
     class Meta:
         model = Team
@@ -87,4 +88,10 @@ class TaskCreateSerializer(serializers.ModelSerializer):
 class TaskUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
+        fields = '__all__'
+
+
+class InviteToTeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invitation
         fields = '__all__'

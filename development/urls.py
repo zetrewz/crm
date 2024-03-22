@@ -2,7 +2,7 @@ from django.urls import path
 
 from development.views import ProjectListView, ProjectCreateView, TeamListView, TeamCreateView, TeamUpdateView, \
     TeamDetailView, SprintListView, SprintCreateView, SprintDetailView, SprintUpdateView, TaskListView, TaskDetailView, \
-    TaskCreateView, TaskUpdateView
+    TaskCreateView, TaskUpdateView, AddTaskToSprintView, InviteToTeam, JoinTeam, UserInvitations
 
 app_name = 'development'
 
@@ -14,6 +14,8 @@ urlpatterns = [
     path('team/detail/<int:pk>/', TeamDetailView.as_view(), name='team-detail'),
     path('team/create/', TeamCreateView.as_view(), name='team-create'),
     path('team/update/<int:pk>/', TeamUpdateView.as_view(), name='team-update'),
+    path('team/invite/', InviteToTeam.as_view(), name='invite-to-team'),
+    path('team/join/<int:pk>/', JoinTeam.as_view(), name='join-team'),
 
     path('sprint/list/', SprintListView.as_view(), name='sprint-list'),
     path('sprint/detail/<int:pk>/', SprintDetailView.as_view(), name='sprint-detail'),
@@ -24,4 +26,7 @@ urlpatterns = [
     path('task/detail/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
     path('task/create/', TaskCreateView.as_view(), name='task-create'),
     path('task/update/<int:pk>/', TaskUpdateView.as_view(), name='task-update'),
+    path('task/addtsp/<int:pk>/', AddTaskToSprintView.as_view(), name='task-add_to_sprint'),
+
+    path('user/invitations/', UserInvitations.as_view(), name='user_invitations'),
 ]
